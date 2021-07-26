@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+buyer
+
+{% endblock title %}
+
+{% block content %}
+
+    <div class='wrapper'>
+        <div class='header'>
+            <p class='title'>Invoice # </p>
+        </div>
+        <div>
+            <div class='details'>
+                    Buyer Name:{{buyer_name}} <br/>
+                    Buyer Address: {{buyer_add}} <br/>
+                    Buyer Number: {{buyer_no}}
+                    <hr class='hrItem' />
+        </div>
+    </div>
+{% endblock content %}

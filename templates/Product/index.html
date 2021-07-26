@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User Input
+{% endblock title %}
+
+{% block content %}
+<div class="center">
+<div class="medium">Product details form</div>
+    {% comment %} <hr width="400px;"/> {% endcomment %}
+    <br/>
+    <form id="product_form">
+        {% csrf_token %}
+        <div class="col-md-4 mb-3">
+        <label for="product_name">Product name</label>
+        <input type="text" class="form-control" id="product_name" placeholder="Enter Product name" required>
+        </div><br/>
+        <div class="col-md-4 mb-3">
+        <label for="quantity">Quantity</label>
+        <input type="number" class="form-control" id="quantity" placeholder="Enter Quantity" required>
+
+        </div><br/>
+        <div class="col-md-4 mb-3">
+        <label for="tax">Tax</label>
+        <input type="number" class="form-control" id="tax" placeholder="Enter tax value" required>
+        </div><br/>
+        <div class="col-md-4 mb-3">
+        <label for="base_price">Base Price</label>
+        <input type="text" class="form-control" id="base_price" placeholder="Enter base price" required>
+        </div><br/>
+        <div class="col-md-4 mb-3">
+        <label for="invoice">Invoice</label>
+        <input type="text" class="form-control" id="invoice" placeholder="Enter base price" required>
+        </div><br/>
+        <button class="btn btn-primary" type="submit">Submit</button>
+   </form>
+
+
+</div>
+
+     {% comment %} 
+     var form_data = {
+                                                        product_name: $('input[name="product_name"]').val(),
+                                                        quantity:$('input[name="quantity"]').val(),
+                                                        base_price:$('input[name="base_price"]').val(),
+                                                        tax:$('input[name="tax"]').val(),
+                                                        invoice:$('input[name="invoice"]').val(),
+                                                 } 
+                                                 {% endcomment %}
+{% endblock content %}
+
+{% block head %}
+    <script>
+        $(document).ready(function() {  
+         
+            $('#product_form').submit(function (e) {
+                                   var form_data = {
+                                                        csrfmiddlewaretoken: csrf_token,
+
+                                                        "product_name": $("#product_name").val(),
+                                                        "quantity":$("#quantity").val(),
+                                                        "base_price":$("#base_price").val(),
+                                                        "tax":$("#tax").val(),
+                                                        "invoice":$("#invoice").val(),
+                                                 }
+
+                                e.preventDefault();
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/product/item/",
+                                    dataType: "json",
+                                    data:  JSON.stringify(form_data),
+                                    success: function (data) {
+                                        console.log('Submission was successful.');
+                                        console.log(data);
+                                        },
+                                    error: function (data) {
+                                        console.log('An error occurred.');
+                                        console.log(data);
+                                    },
+                                });
+                                });
+            });
+
+    </script>
+
+{% endblock head %}
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block title %}
+User Input
+{% endblock title %}
+
+{% block content %}
+
+<H3>Product details form<h3>
+    <hr/>
+    <form action="/invoice/" method="POST">
+    {% csrf_token %}
+
+    <table>
+
+        {{form.as_table}}
+
+        {% comment %} {{formset.management_form}}
+        {% for form in formset %}
+                {{form.as_table}}
+        {% endfor %} {% endcomment %}
+        {% comment %} <tr>
+              <td colspan="2">
+                  <input type="submit" value="Save" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+ 
+{% endblock content %}  {% endcomment %}

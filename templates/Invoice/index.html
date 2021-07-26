@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User Input
+{% endblock title %}
+
+{% block content %}
+
+<H3>Invoice details form<h3>
+    <hr/>
+    <form action="/invoice/" method="POST">
+
+    <table>
+        {{form_invoice.as_table}}
+        {% csrf_token %}
+
+        <tr>
+              <td colspan="2">
+                  <input type="submit" value="Save" />
+                </td>
+            </tr>
+        </table>
+
+    </form>
+
+
+{% endblock content %}

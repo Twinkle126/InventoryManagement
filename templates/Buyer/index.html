@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User Input
+{% endblock title %}
+
+{% block content %}
+
+<div class="center">
+<div class="medium">Buyer details form</div>
+<br/>
+    {% comment %} <hr width="400px;"/> {% endcomment %}
+    <form id="buyer_form" action="/seller_view/" >
+        {% csrf_token %}
+        <div class="col-md-4 mb-3">
+        <label for="buyer_name">Buyer name</label>
+        <input type="text" class="form-control" id="buyer_name" placeholder="Enter Product name" required>
+        </div><br/>
+        <div class="col-md-4 mb-3">
+        <label for="buyer_address">Buyer address</label>
+        <input type="text" class="form-control" id="buyer_address" placeholder="Enter address" required>
+
+        </div><br/>
+        <div class="col-md-4 mb-3">
+        <label for="buyer_phone">Buyer phone</label>
+        <input type="number" class="form-control" id="buyer_phone" placeholder="Enter phone number" required>
+        </div><br/>
+    
+        <button class="btn btn-primary" type="submit">Submit</button>
+   </form>
+
+
+</div>
+
+ 
+{% endblock content %}
+
+{% block head %}
+  <script>
+        $(document).ready(function() {  
+         
+            $('#buyer_form').submit(function (e) {
+                                var form_data = {
+                                                csrfmiddlewaretoken: csrf_token,
+
+                                                "buyer_name": $("#buyer_name").val(),
+                                                "buyer_address": $("#buyer_address").val(),
+                                                "buyer_phone": $("#buyer_phone").val(),
+
+                                                 }
+                                 
+
+                                e.preventDefault();
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/buyer/",
+                                    dataType: "json",
+                                    data: form_data  ,
+                                    success: function (data) {
+                                        console.log('Submission was successful.');
+                                        console.log(data);
+                                        },
+                                    error: function (data) {
+                                        console.log('An error occurred.');
+                                        console.log(data);
+                                    },
+                                });
+                                });
+            });
+
+    </script>
+
+
+{% endblock head%}

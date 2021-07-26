@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Product Invoice
+{% endblock title %}
+
+{% block content %}
+
+    <div class='center medium'>
+        <div class='header'>
+            <p class='title'>Invoice # {{product.invoice.id}} </p>
+            <hr class='hrItem'/>
+        </div>
+        <div class="container">
+            <div>
+            <h6>Buyer Details</h6>
+            <div class='details'>
+                    Buyer Name:{{buyer.buyer_name}} <br/>
+                    Buyer Address: {{buyer.buyer_address}} <br/>
+                    Buyer Number: {{buyer.buyer_phone}}
+                    <hr class='hrItem' />
+         </div>
+            <div>
+            <h6>Seller Details</h6>
+            <div class='details'>
+                    Seller Name:{{seller.seller_name}} <br/>
+                    Seller Address: {{seller.seller_address}} <br/>
+                    Seller Number: {{seller.seller_phone}}
+                    <hr class='hrItem' />
+            </div>
+        
+        </div>
+
+        <div>
+            <h6>Product Details</h6>
+            <div class='details'>
+
+                <table style="width:100%">
+                    <tr>
+                        <th>S.No</th>
+                        <th> Product Name</th> 
+                        <th>Quantity</th>
+                        <th>Base Price</th> 
+                        <th>Tax</th>
+                        <th>Amount</th> 
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>apple</td>
+                        <td>50</td>
+                        <td>134</td>
+                        <td>9</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>orange</td>
+                        <td>94</td>
+                        <td>98</td>
+                        <td>998</td>
+                        <td>5080</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>mango</td>
+                        <td>80</td>
+                        <td>998</td>
+                        <td>89</td>
+                        <td>580</td>
+                    </tr>
+                </table>
+
+                
+{% comment %} 
+                    Product Name:{{product.product_name}} <br/>
+                    Quantity: {{product.quantity}} <br/>
+                    Base Price : {{product.base_price}} <br/>
+                    Tax: {{product.tax}} <br/>
+                    Amount: {{product.amount}}
+                    <hr class='hrItem' /> {% endcomment %}
+        </div>
+    </div>
+{% endblock content %}

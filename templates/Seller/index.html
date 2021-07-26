@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User Input
+{% endblock title %}
+
+{% block content %}
+<div class="center">
+<div class="medium">Seller details form</div>
+<br/>
+    {% comment %} <hr width="400px;"/> {% endcomment %}
+    <form id="seller_form" action="/product/product_view/">
+        {% csrf_token %}
+        <div class="col-md-4 mb-3">
+        <label for="seller_name">Seller name</label>
+        <input type="text" class="form-control" id="seller_name" placeholder="Enter Seller name" required>
+        </div><br/>
+        <div class="col-md-4 mb-3">
+        <label for="seller_address">Seller address</label>
+        <input type="text" class="form-control" id="seller_address" placeholder="Enter address" required>
+
+        </div><br/>
+        <div class="col-md-4 mb-3">
+        <label for="seller_phone">Seller phone</label>
+        <input type="number" class="form-control" id="seller_phone" placeholder="Enter phone number" required>
+        </div><br/>
+        <div class="col-md-4 mb-3">
+        <label for="signature">Signature</label>
+        <input type="file" class="form-control" id="signature" name="signature" accept="image/*" required>
+        </div><br/>
+    
+        <button class="btn btn-primary" type="submit">Submit</button>
+   </form>
+
+
+</div>
+
+    {% comment %} <hr/>
+    <form action="/product/product_view/" method="POST">
+    {% csrf_token %}
+
+    <table>
+        {{form3.as_table}}
+        <tr>
+              <td colspan="2">
+                  <input type="submit" value="Save" />
+                </td>
+            </tr>
+        </table>
+    </form> {% endcomment %}
+
+
+{% endblock content %}
+
+
+
+{% block head %}
+  <script>
+        $(document).ready(function() {  
+         
+            $('#seller_form').submit(function (e) {
+                                   var form_data = {
+                                                        csrfmiddlewaretoken: csrf_token,
+
+                                                        "seller_name": $("#seller_name").val(),
+                                                        "seller_address": $("#seller_address").val(),
+                                                        "seller_phone": $("#seller_phone").val(),
+                                                        "signature": $("#signature").val(),
+
+
+                                                 }
+
+                                e.preventDefault();
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/seller/",
+                                    dataType: "json",
+                                    data:  JSON.stringify(form_data),
+                                    success: function (data) {
+                                        console.log('Submission was successful.');
+                                        console.log(data);
+                                        },
+                                    error: function (data) {
+                                        console.log('An error occurred.');
+                                        console.log(data);
+                                    },
+                                });
+                                });
+            });
+
+    </script>
+
+
+{% endblock head%}

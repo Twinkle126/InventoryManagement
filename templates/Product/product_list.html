@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+All Products listed here
+{% endblock title %}
+
+{% block content %}
+    <div class="center">
+    {% for product in object_list%}
+        {{product}} 
+        <a href="{% url 'product:product_pdf' product.pk%}"><button class="btn btn-primary">pdf</button></a>
+    {% endfor %}
+    </div>
+
+{% endblock content %}
